@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zabbix_export>
+    <version>5.2</version>
+    <date>2021-08-30T14:45:46Z</date>
+    <groups>
+        <group>
+            <name>Templates</name>
+        </group>
+    </groups>
+    <templates>
+        <template>
+            <template>smart_to_zabbix by yakumo-saki</template>
+            <name>smart_to_zabbix by yakumo-saki</name>
+            <description>https://github.com/yakumo-saki/smart-to-zabbix</description>
+            <groups>
+                <group>
+                    <name>Templates</name>
+                </group>
+            </groups>
+            <items>
+                <item>
+                    <name>smartctl version</name>
+                    <type>TRAP</type>
+                    <key>smartmontools.version</key>
+                    <delay>0</delay>
+                    <value_type>FLOAT</value_type>
+                </item>
+            </items>
+            <discovery_rules>
+                <discovery_rule>
+                    <name>smartmontools.discovery</name>
+                    <type>TRAP</type>
+                    <key>smartmontools.discovery</key>
+                    <delay>0</delay>
+                    <description>Item for Discovery.</description>
+                    <item_prototypes>
+                        <item_prototype>
+                            <name>SMART: Drive model [{#DISKNAME}]</name>
+                            <type>TRAP</type>
+                            <key>smartmontools.model[{#KEYNAME}]</key>
+                            <delay>0</delay>
+                            <trends>0</trends>
+                            <value_type>CHAR</value_type>
+                            <description>Drive model.</description>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>SMART: 0Ch (012) Power Cycle [{#DISKNAME}]</name>
+                            <type>TRAP</type>
+                            <key>smartmontools.power_cycle[{#KEYNAME}]</key>
+                            <delay>0</delay>
+                            <description>Power Cycle</description>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>SMART: 09h (009) Power on hours [{#DISKNAME}]</name>
+                            <type>TRAP</type>
+                            <key>smartmontools.power_on_hours[{#KEYNAME}]</key>
+                            <delay>0</delay>
+                            <units>hours</units>
+                            <description>Power On Hours</description>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>SMART: Rotation rate [{#DISKNAME}]</name>
+                            <type>TRAP</type>
+                            <key>smartmontools.rotation_rate[{#KEYNAME}]</key>
+                            <delay>0</delay>
+                            <trends>0</trends>
+                            <value_type>CHAR</value_type>
+                            <description>0 means SSD</description>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>SMART: SSD GigaBytes written [{#DISKNAME}]</name>
+                            <type>TRAP</type>
+                            <key>smartmontools.ssd.bytes_written[{#KEYNAME}]</key>
+                            <delay>0</delay>
+                            <units>GB</units>
+                            <description>SSD only.</description>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>SMART: SSD Lifespan percent [{#DISKNAME}]</name>
+                            <type>TRAP</type>
+                            <key>smartmontools.ssd.lifespan</key>
+                            <delay>0</delay>
+                            <units>%</units>
+                            <description>SSD Only 100% max -&gt; 0%
+No Specific SMART ID</description>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>SMART: C2h (194) Temperature [{#DISKNAME}]</name>
+                            <type>TRAP</type>
+                            <key>smartmontools.temperature[{#KEYNAME}]</key>
+                            <delay>0</delay>
+                            <units>c</units>
+                            <description>Temperature</description>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>SMART: Drive type [{#DISKNAME}]</name>
+                            <type>TRAP</type>
+                            <key>smartmontools.type[{#KEYNAME}]</key>
+                            <delay>0</delay>
+                            <trends>0</trends>
+                            <value_type>CHAR</value_type>
+                            <description>Drive type. ex) scsi/nvme</description>
+                        </item_prototype>
+                    </item_prototypes>
+                </discovery_rule>
+            </discovery_rules>
+        </template>
+    </templates>
+</zabbix_export>
