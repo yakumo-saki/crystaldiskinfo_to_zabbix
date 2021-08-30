@@ -1,3 +1,7 @@
+# NOT FINISHED YET
+
+this is under heavy development
+
 ## smart to zabbix
 
 smartctl を使用して取得したSMART情報をZABBIXに送信します。
