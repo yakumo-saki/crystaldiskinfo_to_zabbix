@@ -1,7 +1,6 @@
 import logging
 from interpriters.BaseInterpriter import BaseInterpriter
-
-from lib.zabbix_data import get_empty_data
+from const import Keys
 
 logger = logging.getLogger(__name__)
 
@@ -14,6 +13,6 @@ class BasicInterpriter(BaseInterpriter):
     解釈を行います。
     """
     def parse(self, data):
-        ret = get_empty_data()
+        ret = self.basic_parse(data)
         return ret
 

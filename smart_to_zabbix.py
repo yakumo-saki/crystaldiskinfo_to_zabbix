@@ -8,7 +8,7 @@ from pprint import pprint
 
 import config as cfg
 
-import lib.zabbix as zabbix
+import modules.zabbix as zabbix
 
 
 POWER_CYCLE = "power_cycle"
@@ -106,5 +106,3 @@ if __name__ == '__main__':
   zabbix.send_discovery(parsed_results)
 
   logger.info("END")
-    
-

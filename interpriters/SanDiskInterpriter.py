@@ -1,6 +1,6 @@
 import logging
 from interpriters.BaseInterpriter import BaseInterpriter
-from lib.zabbix_data import get_empty_data
+from modules.zabbix_data import get_empty_data
 
 logger = logging.getLogger(__name__)
 
@@ -16,5 +16,5 @@ class SanDiskInterpriter(BaseInterpriter):
 
     def parse(self, data):
         logger.debug("Sandisk")
-        ret = get_empty_data()
+        ret = self.basic_parse(data)
         return ret
