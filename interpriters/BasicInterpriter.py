@@ -1,6 +1,6 @@
 import logging
 from interpriters.BaseInterpriter import BaseInterpriter
-from modules.Keys import Keys
+from modules.const import Keys
 
 logger = logging.getLogger(__name__)
 
@@ -14,5 +14,8 @@ class BasicInterpriter(BaseInterpriter):
     """
     def parse(self, data):
         ret = self.basic_parse(data)
+
+        ret[Keys.SSD_BYTES_WRITTEN] = self.get_smart_raw_value(data, 233)
+
         return ret
 

@@ -2,7 +2,7 @@ import json
 import logging
 import config as cfg
 
-from modules.Keys import Keys
+from modules.const import Keys
 
 from modules.zabbix_sender import send_to_zabbix_raw
 
@@ -66,7 +66,7 @@ def send_data(data):
     detail = data[dev]  # /dev/sda
     
     for key in detail:
-      if detail[key]:  # key exists ?
+      if detail[key] != None:  # key exists ?
         results.append({
           "host": cfg.ZABBIX_HOST,
           "key": Keys.zabbix_key(key, dev),

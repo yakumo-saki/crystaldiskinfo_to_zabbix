@@ -1,4 +1,4 @@
-from modules.Keys import Keys
+from modules.const import Keys
 import copy 
 
 # parse後のデータ
