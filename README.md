@@ -2,7 +2,7 @@
 
 this is under heavy development
 
-## smart to zabbix
+# smart to zabbix
 
 smartctl を使用して取得したSMART情報をZABBIXに送信します。
 WindowsとLinuxに対応しています。
@@ -10,14 +10,30 @@ WindowsとLinuxに対応しています。
 
 ## 使い方
 
+### 設定
+
+環境変数(TBD)
+
+### 起動
+
 `python3 smart_to_zabbix.py`
 
-## （初回のみ）依存関係のインストール
+## 初回のみ
+
+### 依存関係のインストール
 
 `pip3 install -r requirements.txt`
+（今の所依存関係はありません。スキップしてOK）
 
-## 設定方法
+### Zabbixにテンプレートを登録する
 
+Zabbixの設定 → テンプレート → インポート（右上） を押す
+`zabbix_templates/zbx_export_templates.xml` を選択。
+
+### ホストにテンプレートを紐付け
+
+`smart_to_zabbix by yakumo-saki` テンプレートをホストに紐付け。
+（テンプレート名がアレだと思う場合はリネームしてください。）
 
 ## 参考にしたサイト
 
