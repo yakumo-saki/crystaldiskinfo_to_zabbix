@@ -104,5 +104,6 @@ if __name__ == '__main__':
 
   logger.debug(parsed_results)
   zabbix.send_discovery(parsed_results)
+  zabbix.send_data(parsed_results)
 
   logger.info("END")

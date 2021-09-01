@@ -34,3 +34,6 @@ https://www.slideshare.net/takeshiyamane9/lld-zabbix
 
 http://blog.father.gedow.net/2015/12/08/aws-lambda-python-send-metric-value-to-zabbix/
 
+ESP-WROOM-02からZabbixサーバーにZabbix senderプロトコルでデータを送信する
+（データ送信時の形式について参考にさせていただきました）
+https://qiita.com/mutz0623/items/2c7eae0f762d760875bb

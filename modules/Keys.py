@@ -1,6 +1,4 @@
-from enum import Enum
-
-class Keys(Enum):
+class Keys():
     DISK_MODEL = "model"
     DISK_TYPE = "type"
     DISK_PROTOCOL = "protocol"
@@ -15,5 +13,8 @@ class Keys(Enum):
     SSD_LIFESPAN = "ssd.lifespan"
 
     @classmethod
-    def zabbix_key(cls, key):
-        return "smartctl." + key
+    def zabbix_key(cls, key, dev = None):
+        if (dev != None):
+            return f"smartmontools.{key}[{dev}]"
+
+        return f"smartmontools.{key}"

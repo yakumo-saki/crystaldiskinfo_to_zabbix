@@ -1,6 +1,6 @@
 import logging
 from modules.zabbix_data import get_empty_data
-from const import Keys
+from modules.Keys import Keys
 
 logger = logging.getLogger(__name__)
 

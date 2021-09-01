@@ -1,6 +1,6 @@
 import logging
 from interpriters.BaseInterpriter import BaseInterpriter
-from const import Keys
+from modules.Keys import Keys
 
 logger = logging.getLogger(__name__)
 
