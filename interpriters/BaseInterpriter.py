@@ -49,12 +49,15 @@ class BaseInterpriter(object):
         return None
 
 
-    def get_smart_raw_value(self, smartctl, id_dec):
-
+    def get_smart_value(self, smartctl, id_dec):
         attr = self.get_smart(smartctl, id_dec)
-
         if (attr == None): return None
+        return attr["value"]
 
+
+    def get_smart_raw_value(self, smartctl, id_dec):
+        attr = self.get_smart(smartctl, id_dec)
+        if (attr == None): return None
         return attr["raw"]["value"]
 
 
