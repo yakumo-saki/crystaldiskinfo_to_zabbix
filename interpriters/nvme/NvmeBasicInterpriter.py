@@ -1,10 +1,10 @@
 import logging
-from interpriters.BaseInterpriter import BaseInterpriter
+from interpriters.nvme.NvmeBaseInterpriter import NvmeBaseInterpriter
 from modules.const import Keys
 
 logger = logging.getLogger(__name__)
 
-class BasicInterpriter(BaseInterpriter):
+class BasicInterpriter(NvmeBaseInterpriter):
     """
     最低限の解釈だけを行うInterpriter
     """

@@ -1,5 +1,6 @@
 import logging
-from interpriters.BaseInterpriter import BaseInterpriter
+
+from interpriters.smart.SmartBaseInterpriter import SmartBaseInterpriter
 from modules.const import Keys, Unit
 from interpriters.tbw_estimate import tbw_estimate
 
@@ -8,7 +9,7 @@ logger = logging.getLogger(__name__)
 """
 SanDisk SSDSSDH3 -> Marvel 88SS1074
 """
-class SanDiskInterpriter(BaseInterpriter):
+class SmartSanDiskInterpriter(SmartBaseInterpriter):
     # def __init__(self):
     #     pass
 

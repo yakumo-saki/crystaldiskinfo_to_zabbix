@@ -72,17 +72,24 @@ def get_detail(device):
 
 
 def find_interpriter(device_info):
-    info = None
+    # strict match
     for intp in interpriters.ALL:
-      if (intp.isTargetStrict(device_info)):
+      if (intp.isTargetDeviceType(device_info) and intp.isTargetStrict(device_info)):
         return intp
 
+    # loose match
     for intp in interpriters.ALL:
-      if (intp.isTargetLoose(device_info)):
+      if (intp.isTargetDeviceType(device_info) and intp.isTargetLoose(device_info)):
+        return intp
+
+    # basic
+    for intp in interpriters.BASIC:
+      logger.warn(f"No matching interpriters => {dev} {device_info['model_name']}, using basic interprites instead.")
+      if (intp.isTargetDeviceType(device_info)):
         return intp
 
     logger.debug(f"No interpriters => {dev} {device_info['model_name']}")
-    return interpriters.BASIC
+    raise "No interpriters"
 
 
 if __name__ == '__main__':

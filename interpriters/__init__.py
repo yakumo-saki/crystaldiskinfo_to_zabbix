@@ -1,6 +1,6 @@
-from interpriters.BasicInterpriter import BasicInterpriter
-from interpriters.SanDiskInterpriter import SanDiskInterpriter
+from interpriters.smart.SmartBasicInterpriter import SmartBasicInterpriter
+from interpriters.smart.SanDiskInterpriter import SmartSanDiskInterpriter
 
 
-ALL = [SanDiskInterpriter()]
-BASIC = BasicInterpriter()
+ALL = [SmartSanDiskInterpriter()]
+BASIC = SmartBasicInterpriter()
