@@ -10,9 +10,31 @@ WindowsとLinuxに対応しています。
 
 ## 使い方
 
+初回使用時はもう少し手順が必要です。 下の初回時の項目を参照してください。
 ### 設定
 
-環境変数(TBD)
+環境変数で設定可能です。設定可能項目は以下の通り。
+
+| 変数名 | 設定例 | 用途 | 
+| ZABBIX_SERVER | 192.168.1.123 | Zabbixサーバーのホスト名orIPアドレス。省略不可 |
+| ZABBIX_PORT | 10051 | Zabbixサーバーのポート。省略時は10051 |
+| ZABBIX_HOST | test | Zabbixホスト名。省略不可 |
+
+#### 設定方法
+
+以下の2つの方法があります。同時に行われた場合は、exportされた環境変数が優先されます。
+##### exportで設定する 
+
+```
+export ZABBIX_SERVER=192.168.1.123
+export ZABBIX_PORT=10051
+export ZABBIX_HOST=test
+```
+
+##### .envファイルで設定する
+
+.env.sample ファイルを .env にコピーして内容を編集してください。
+.envファイルは存在しなくても動作します。
 
 ### 起動
 
@@ -23,7 +45,6 @@ WindowsとLinuxに対応しています。
 ### 依存関係のインストール
 
 `pip3 install -r requirements.txt`
-（今の所依存関係はありません。スキップしてOK）
 
 ### Zabbixにテンプレートを登録する
 
