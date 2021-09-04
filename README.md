@@ -1,6 +1,6 @@
-# NOT FINISHED YET
+# Under development
 
-this is under heavy development
+NVMe disk is not tested. otherwise may be work
 
 # smart to zabbix
 
