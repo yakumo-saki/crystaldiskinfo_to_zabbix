@@ -30,3 +30,23 @@ class Keys():
             return f"smartmontools.{key}[{dev}]"
 
         return f"smartmontools.{key}"
+
+
+class DeviceKey():
+    """Zabbixのデバイスディスカバリに使うキー
+    """
+    KEY = 'smartmontools.discovery.device'
+    KEY_NAME = '{#KEYNAME}'
+    DISK_NAME = '{#DISKNAME}'
+
+
+class AttrKey():
+    """ZabbixのSMART属性ディスカバリに使うキー
+    """
+    KEY = 'smartmontools.discovery.attr'
+    ATTR_NAME = "{#ATTRNAME}"
+    ATTR_ID = "{#ATTRID}"
+    DISK_NAME = "{#DISKNAME}"
+    DEV_NAME = "{#DEVNAME}"
+
+    ITEM_KEY = "smartmontools.attribute[{#DEVNAME,#ATTR}]"

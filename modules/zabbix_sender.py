@@ -63,3 +63,11 @@ def send_to_zabbix_raw(zabbix_server, zabbix_port, json_text):
       pass
 
   return result
+
+
+def send_to_zabbix(dictdata):
+  import config as cfg
+  
+  data = json.dumps(dictdata)
+  logger.debug(f"data length is {len(data)}")
+  send_to_zabbix_raw(cfg.ZABBIX_SERVER, cfg.ZABBIX_PORT ,data)

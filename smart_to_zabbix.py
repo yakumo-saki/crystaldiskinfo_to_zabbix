@@ -8,34 +8,27 @@ from pprint import pprint
 
 import config as cfg
 
-import modules.zabbix as zabbix
+import modules.zabbix_parsed as zbx_parsed
+import modules.zabbix_smart as zbx_smart
 
-
-POWER_CYCLE = "power_cycle"
-ROTATION_RATE = "rotation_rate"
-POWER_ON_HOURS = "power_on_hours"
-TEMPERATURE = "temperature"
-DISK_MODEL = "model"
-DISK_TYPE = "type"
-DISK_ROTATION_RATE = "rotation_rate"
-SSD_BYTES_WRITTEN = "ssd.bytes_written"
-SSD_LIFESPAN = "ssd.lifespan"
-
-RESULT_BASE = {
-  POWER_CYCLE: "", ROTATION_RATE: "", POWER_ON_HOURS: "",
-
-
-}
-
-logging.basicConfig(encoding='utf-8', level=logging.DEBUG)
+logging.basicConfig(encoding='utf-8', level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 def exec_smartctl_scan():
 
-  if cfg.SMARTCTL_SCAN_CMD[0] == 'sudo':
+  cmd = None
+
+  import platform
+  platform = platform.system()
+  if platform == 'Windows':
+    cmd = cfg.WIN_SMARTCTL_SCAN_CMD.copy()
+  else:
+    cmd = cfg.LINUX_SMARTCTL_SCAN_CMD.copy()
+
+  if cmd[0] == 'sudo':
     logger.info("Asking your password by sudo") 
 
-  scan = subprocess.run(cfg.SMARTCTL_SCAN_CMD, encoding='utf-8', stdout=subprocess.PIPE)
+  scan = subprocess.run(cmd, encoding='utf-8', stdout=subprocess.PIPE)
   
   # logger.debug(scan.stdout)
   result = json.loads(scan.stdout)
@@ -45,7 +38,15 @@ def exec_smartctl_scan():
 
 def exec_smartctl_device_info(device_name):
 
-  run_cmd = cfg.SMARTCTL_DETAIL_CMD.copy()
+  run_cmd = None
+
+  import platform
+  platform = platform.system()
+  if platform == 'Windows':
+    run_cmd = cfg.WIN_SMARTCTL_DETAIL_CMD.copy()
+  else:
+    run_cmd = cfg.LINUX_SMARTCTL_DETAIL_CMD.copy()
+
   run_cmd.append(device_name)
 
   logger.debug(run_cmd)
@@ -66,7 +67,7 @@ def get_detail(device):
       logger.debugf("get_detail {key}")
       #metrics.append(ZabbixMetric(ZABBIX_HOST, key, d["VALUE"]))
 
-    zabbix.send_to_zabbix(metrics)
+    zbx_parsed.send_to_zabbix(metrics)
 
     return None
 
@@ -98,19 +99,26 @@ if __name__ == '__main__':
 
   # scan_resultだけでdiscoveryを送信したいが、model_name等情報が足りない
   scan_result = exec_smartctl_scan()
+   
+  full_results = {}
   parsed_results = {}
 
   for device in scan_result["devices"]:
     dev = device["name"]
     logger.info(f"Checking device {dev}")
     device_info = exec_smartctl_device_info(device["name"])
+    full_results[dev] = device_info
 
     interpriter = find_interpriter(device_info)
 
     parsed_results[dev] = interpriter.parse(device_info)
 
-  logger.debug(parsed_results)
-  zabbix.send_discovery(parsed_results)
-  zabbix.send_data(parsed_results)
+  # パース成功したデータを扱う
+  zbx_parsed.send_device_discovery(parsed_results)
+  zbx_parsed.send_parsed_data(parsed_results)
+
+  # SMART全データを送信する
+  zbx_smart.send_attribute_discovery(full_results)
+
 
   logger.info("END")

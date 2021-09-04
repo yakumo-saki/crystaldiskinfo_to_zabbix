@@ -8,15 +8,10 @@ load_dotenv(join(dirname(__file__), '.env'))
 
 # 環境変数を読む。 
 ZABBIX_SERVER = os.environ.get('ZABBIX_SERVER', None)
-ZABBIX_PORT = os.environ.get('ZABBIX_PORT', "10051")
+ZABBIX_PORT = int(os.environ.get('ZABBIX_PORT', "10051"))
 ZABBIX_HOST = os.environ.get('ZABBIX_HOST', None)
 
 # 以下はZabbixテンプレートと整合性を取る必要がある
-KEY_NAME = '{#KEYNAME}'
-DISK_NAME = '{#DISKNAME}'
-DISCOVERY_KEY = 'smartmontools.discovery.device'
-
-ITEM_KEY = "smartmontools.attribute[{#DEVNAME,#ATTR}]"
 
 #  
 LINUX_SMARTCTL_SCAN_CMD = ['sudo', 'smartctl', '--json', '--scan']
