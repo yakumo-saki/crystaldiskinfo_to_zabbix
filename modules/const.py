@@ -49,4 +49,8 @@ class AttrKey():
     DISK_NAME = "{#DISKNAME}"
     DEV_NAME = "{#DEVNAME}"
 
-    ITEM_KEY = "smartmontools.attribute[{#DEVNAME,#ATTR}]"
+    # {0} = device  {1} = attr id
+    RAWVALUE_KEY = "smartmontools.attr.rawvalue[{0},{1}]"
+    THRESH_KEY = "smartmontools.attr.threshould[{0},{1}]"
+    VALUE_KEY = "smartmontools.attr.value[{0},{1}]"
+    WORST_KEY = "smartmontools.attr.worst[{0},{1}]"

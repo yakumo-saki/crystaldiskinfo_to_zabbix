@@ -43,7 +43,8 @@ def create_attribute_list_non_nvme(discovery_base, smart_attributes):
   for attr in smart_attributes["table"]:
     discovery = copy.deepcopy(discovery_base)
 
-    discovery[AttrKey.ATTR_NAME] = attr["name"] 
+    # non NVMeの場合、 Unknown Attributeがあり得るので、SMART ID を名前の先頭につけておく
+    discovery[AttrKey.ATTR_NAME] = "{0} {1}".format(attr["id"], attr["name"])
     discovery[AttrKey.ATTR_ID] = attr["id"]
     result.append(discovery)
 
@@ -67,3 +68,56 @@ def create_attribute_list_nvme(discovery_base, smart_attributes):
     result.append(discovery)
 
   return result
+
+
+def send_smart_data(data):
+  logger.info("Send S.M.A.R.T data to zabbix")
+
+  results = []
+  for dev in data:
+    detail = data[dev]  # /dev/sda
+    
+    if ("ata_smart_attributes" in detail):
+      results = create_value_list_non_nvme(dev, detail["ata_smart_attributes"])
+    elif ("nvme_smart_health_information_log" in detail):
+      results = create_value_list_nvme(dev, detail["nvme_smart_health_information_log"])
+
+  sender_data = {"request": "sender data", "data": results}
+  #valueStr = json.dumps({"data": discovery_result})
+  # print(json.dumps(sender_data, indent=2))
+
+  send_to_zabbix(sender_data)
+
+  return None
+
+
+def create_value_list_non_nvme(dev, smart_attributes):
+  results = []
+  for attr in smart_attributes["table"]:
+
+    keyvalue = {
+      AttrKey.RAWVALUE_KEY.format(dev, attr["id"]): attr["raw"]["value"],
+      AttrKey.VALUE_KEY.format(dev, attr["id"]): attr["value"],
+      AttrKey.WORST_KEY.format(dev, attr["id"]): attr["worst"]
+    }
+
+    for k,v in keyvalue.items():
+      results.append({"host": cfg.ZABBIX_HOST, "key": k, "value": v})
+
+  return results
+
+
+def create_value_list_nvme(dev, smart_attributes):
+  results = []
+  for key in smart_attributes:
+
+    # NVMe にはthreshouldやworstはなく、valueだけ
+    if key == "temperature_sensors":
+      for val, idx in smart_attributes["temperature_sensors"]:
+        key = AttrKey.VALUE_KEY.format(dev, f"temperature_sensors{idx}")
+        results.append({"host": cfg.ZABBIX_HOST, "key": key, "value": val})
+    else:
+      key = AttrKey.VALUE_KEY.format(dev, key)
+      results.append({"host": cfg.ZABBIX_HOST, "key": key, "value": val})
+
+  return results

@@ -119,6 +119,6 @@ if __name__ == '__main__':
 
   # SMART全データを送信する
   zbx_smart.send_attribute_discovery(full_results)
-
+  zbx_smart.send_smart_data(full_results)
 
   logger.info("END")
