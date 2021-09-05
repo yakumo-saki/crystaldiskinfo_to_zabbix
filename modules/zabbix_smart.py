@@ -101,6 +101,9 @@ def create_value_list_non_nvme(dev, smart_attributes):
       AttrKey.WORST_KEY.format(dev, attr["id"]): attr["worst"]
     }
 
+    if ("thresh" in attr):
+      keyvalue[AttrKey.THRESH_KEY.format(dev, attr["id"])] = attr["thresh"]
+
     for k,v in keyvalue.items():
       results.append({"host": cfg.ZABBIX_HOST, "key": k, "value": v})
 

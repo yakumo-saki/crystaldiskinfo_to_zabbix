@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
     <version>5.2</version>
-    <date>2021-09-01T11:10:07Z</date>
+    <date>2021-09-05T14:52:24Z</date>
     <groups>
         <group>
             <name>Templates</name>
@@ -9,14 +9,22 @@
     </groups>
     <templates>
         <template>
-            <template>smart_to_zabbix by yakumo-saki</template>
-            <name>smart_to_zabbix by yakumo-saki</name>
+            <template>smart_to_zabbix 20210905 by yakumo-saki</template>
+            <name>smart_to_zabbix 20210905 by yakumo-saki</name>
             <description>https://github.com/yakumo-saki/smart-to-zabbix</description>
             <groups>
                 <group>
                     <name>Templates</name>
                 </group>
             </groups>
+            <applications>
+                <application>
+                    <name>Disk</name>
+                </application>
+                <application>
+                    <name>SMART</name>
+                </application>
+            </applications>
             <items>
                 <item>
                     <name>smartctl version</name>
@@ -28,11 +36,83 @@
             </items>
             <discovery_rules>
                 <discovery_rule>
-                    <name>smartmontools.discovery</name>
+                    <name>smartmontools S.M.A.R.T Attribute discovery</name>
                     <type>TRAP</type>
-                    <key>smartmontools.discovery</key>
+                    <key>smartmontools.discovery.attr</key>
                     <delay>0</delay>
-                    <description>Item for Discovery.</description>
+                    <lifetime>7d</lifetime>
+                    <item_prototypes>
+                        <item_prototype>
+                            <name>SMART: Raw Value {#ATTRNAME} [{#DISKNAME}]</name>
+                            <type>TRAP</type>
+                            <key>smartmontools.attr.rawvalue[{#DEVNAME},{#ATTRID}]</key>
+                            <delay>0</delay>
+                            <description>S.M.A.R.T Raw Value
+Not available on NVMe SSD</description>
+                            <applications>
+                                <application>
+                                    <name>Disk</name>
+                                </application>
+                                <application>
+                                    <name>SMART</name>
+                                </application>
+                            </applications>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>SMART: Threshould Value {#ATTRNAME} [{#DISKNAME}]</name>
+                            <type>TRAP</type>
+                            <key>smartmontools.attr.threshould[{#DEVNAME},{#ATTRID}]</key>
+                            <delay>0</delay>
+                            <description>S.M.A.R.T Worst Value.
+Not available on NVMe SSD</description>
+                            <applications>
+                                <application>
+                                    <name>Disk</name>
+                                </application>
+                                <application>
+                                    <name>SMART</name>
+                                </application>
+                            </applications>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>SMART: Value {#ATTRNAME} [{#DISKNAME}]</name>
+                            <type>TRAP</type>
+                            <key>smartmontools.attr.value[{#DEVNAME},{#ATTRID}]</key>
+                            <delay>0</delay>
+                            <description>S.M.A.R.T Value</description>
+                            <applications>
+                                <application>
+                                    <name>Disk</name>
+                                </application>
+                                <application>
+                                    <name>SMART</name>
+                                </application>
+                            </applications>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>SMART: Worst value {#ATTRNAME} [{#DISKNAME}]</name>
+                            <type>TRAP</type>
+                            <key>smartmontools.attr.worst[{#DEVNAME},{#ATTRID}]</key>
+                            <delay>0</delay>
+                            <description>S.M.A.R.T Value</description>
+                            <applications>
+                                <application>
+                                    <name>Disk</name>
+                                </application>
+                                <application>
+                                    <name>SMART</name>
+                                </application>
+                            </applications>
+                        </item_prototype>
+                    </item_prototypes>
+                </discovery_rule>
+                <discovery_rule>
+                    <name>smartmontools device discovery</name>
+                    <type>TRAP</type>
+                    <key>smartmontools.discovery.device</key>
+                    <delay>0</delay>
+                    <lifetime>14d</lifetime>
+                    <description>Device discovery, /dev/sda /dev/sdb /dev/sdc</description>
                     <item_prototypes>
                         <item_prototype>
                             <name>SMART: Drive model [{#DISKNAME}]</name>
@@ -41,7 +121,15 @@
                             <delay>0</delay>
                             <trends>0</trends>
                             <value_type>CHAR</value_type>
-                            <description>Drive model.</description>
+                            <description>Drive model. (by smartctl)</description>
+                            <applications>
+                                <application>
+                                    <name>Disk</name>
+                                </application>
+                                <application>
+                                    <name>SMART</name>
+                                </application>
+                            </applications>
                         </item_prototype>
                         <item_prototype>
                             <name>SMART: 0Ch (012) Power Cycle [{#DISKNAME}]</name>
@@ -49,7 +137,15 @@
                             <key>smartmontools.power_cycle[{#KEYNAME}]</key>
                             <delay>0</delay>
                             <units>!</units>
-                            <description>Power Cycle</description>
+                            <description>Power Cycle (by smartctl)</description>
+                            <applications>
+                                <application>
+                                    <name>Disk</name>
+                                </application>
+                                <application>
+                                    <name>SMART</name>
+                                </application>
+                            </applications>
                         </item_prototype>
                         <item_prototype>
                             <name>SMART: 09h (009) Power on hours [{#DISKNAME}]</name>
@@ -57,7 +153,15 @@
                             <key>smartmontools.power_on_hours[{#KEYNAME}]</key>
                             <delay>0</delay>
                             <units>!hours</units>
-                            <description>Power On Hours</description>
+                            <description>Power On Hours (by smartctl)</description>
+                            <applications>
+                                <application>
+                                    <name>Disk</name>
+                                </application>
+                                <application>
+                                    <name>SMART</name>
+                                </application>
+                            </applications>
                         </item_prototype>
                         <item_prototype>
                             <name>SMART: Drive protocol [{#DISKNAME}]</name>
@@ -66,7 +170,15 @@
                             <delay>0</delay>
                             <trends>0</trends>
                             <value_type>CHAR</value_type>
-                            <description>Drive protocol. ex) ATA</description>
+                            <description>Drive protocol. ex) ATA (by smartctl)</description>
+                            <applications>
+                                <application>
+                                    <name>Disk</name>
+                                </application>
+                                <application>
+                                    <name>SMART</name>
+                                </application>
+                            </applications>
                         </item_prototype>
                         <item_prototype>
                             <name>SMART: Rotation rate [{#DISKNAME}]</name>
@@ -75,7 +187,15 @@
                             <delay>0</delay>
                             <trends>0</trends>
                             <value_type>CHAR</value_type>
-                            <description>0 means SSD</description>
+                            <description>0 means SSD (by smartctl)</description>
+                            <applications>
+                                <application>
+                                    <name>Disk</name>
+                                </application>
+                                <application>
+                                    <name>SMART</name>
+                                </application>
+                            </applications>
                         </item_prototype>
                         <item_prototype>
                             <name>SMART: Drive Serial Number [{#DISKNAME}]</name>
@@ -84,14 +204,30 @@
                             <delay>0</delay>
                             <trends>0</trends>
                             <value_type>CHAR</value_type>
-                            <description>Drive serial number.</description>
+                            <description>Drive serial number. (by smartctl)</description>
+                            <applications>
+                                <application>
+                                    <name>Disk</name>
+                                </application>
+                                <application>
+                                    <name>SMART</name>
+                                </application>
+                            </applications>
                         </item_prototype>
                         <item_prototype>
                             <name>SMART: Status passed [{#DISKNAME}]</name>
                             <type>TRAP</type>
                             <key>smartmontools.smart_status_passed[{#KEYNAME}]</key>
                             <delay>0</delay>
-                            <description>1 = true 0 = false</description>
+                            <description>1 = true 0 = false (by smartctl)</description>
+                            <applications>
+                                <application>
+                                    <name>Disk</name>
+                                </application>
+                                <application>
+                                    <name>SMART</name>
+                                </application>
+                            </applications>
                             <trigger_prototypes>
                                 <trigger_prototype>
                                     <expression>{last(#1)}&lt;&gt;1</expression>
@@ -105,7 +241,15 @@
                             <key>smartmontools.ssd.bytes_written[{#KEYNAME}]</key>
                             <delay>0</delay>
                             <units>Bytes</units>
-                            <description>SSD only.</description>
+                            <description>SSDs In my database only.</description>
+                            <applications>
+                                <application>
+                                    <name>Disk</name>
+                                </application>
+                                <application>
+                                    <name>SMART</name>
+                                </application>
+                            </applications>
                         </item_prototype>
                         <item_prototype>
                             <name>SMART: SSD TBW Bytes [{#DISKNAME}]</name>
@@ -113,18 +257,35 @@
                             <key>smartmontools.ssd.bytes_written_max[{#KEYNAME}]</key>
                             <delay>0</delay>
                             <units>Bytes</units>
-                            <description>SSD only.
+                            <description>SSDs In my database only.
 Known as TBW (Tera Byte Write)
 Value is TiB because it is marketing term.</description>
+                            <applications>
+                                <application>
+                                    <name>Disk</name>
+                                </application>
+                                <application>
+                                    <name>SMART</name>
+                                </application>
+                            </applications>
                         </item_prototype>
                         <item_prototype>
                             <name>SMART: SSD Lifespan percent [{#DISKNAME}]</name>
                             <type>TRAP</type>
-                            <key>smartmontools.ssd.lifespan</key>
+                            <key>smartmontools.ssd.lifespan[{#KEYNAME}]</key>
                             <delay>0</delay>
                             <units>%</units>
-                            <description>SSD Only 100% max -&gt; 0%
+                            <description>SSDs In my database only.
+SSD Only 100% max -&gt; 0%
 No Specific SMART ID</description>
+                            <applications>
+                                <application>
+                                    <name>Disk</name>
+                                </application>
+                                <application>
+                                    <name>SMART</name>
+                                </application>
+                            </applications>
                         </item_prototype>
                         <item_prototype>
                             <name>SMART: Temperature [{#DISKNAME}]</name>
@@ -132,8 +293,16 @@ No Specific SMART ID</description>
                             <key>smartmontools.temperature[{#KEYNAME}]</key>
                             <delay>0</delay>
                             <units>c</units>
-                            <description>Temperature
+                            <description>Temperature (by smartctl)
 SMART: C2h (194) Temperature</description>
+                            <applications>
+                                <application>
+                                    <name>Disk</name>
+                                </application>
+                                <application>
+                                    <name>SMART</name>
+                                </application>
+                            </applications>
                         </item_prototype>
                         <item_prototype>
                             <name>SMART: Drive type [{#DISKNAME}]</name>
@@ -142,7 +311,15 @@ SMART: C2h (194) Temperature</description>
                             <delay>0</delay>
                             <trends>0</trends>
                             <value_type>CHAR</value_type>
-                            <description>Drive type. ex) scsi/nvme</description>
+                            <description>Drive type. ex) scsi/nvme (by smartctl)</description>
+                            <applications>
+                                <application>
+                                    <name>Disk</name>
+                                </application>
+                                <application>
+                                    <name>SMART</name>
+                                </application>
+                            </applications>
                         </item_prototype>
                     </item_prototypes>
                 </discovery_rule>
