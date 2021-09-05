@@ -1,4 +1,4 @@
-# Under development
+# Status
 
 NVMe disk is not tested. otherwise may be work
 

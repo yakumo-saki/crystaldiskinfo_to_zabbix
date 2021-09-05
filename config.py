@@ -10,6 +10,7 @@ load_dotenv(join(dirname(__file__), '.env'))
 ZABBIX_SERVER = os.environ.get('ZABBIX_SERVER', None)
 ZABBIX_PORT = int(os.environ.get('ZABBIX_PORT', "10051"))
 ZABBIX_HOST = os.environ.get('ZABBIX_HOST', None)
+LOG_LEVEL = os.environ.get('LOG_LEVEL', "DEBUG")
 
 # 以下はZabbixテンプレートと整合性を取る必要がある
 

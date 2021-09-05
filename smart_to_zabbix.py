@@ -11,7 +11,6 @@ import config as cfg
 import modules.zabbix_parsed as zbx_parsed
 import modules.zabbix_smart as zbx_smart
 
-logging.basicConfig(encoding='utf-8', level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 def exec_smartctl_scan():
@@ -94,6 +93,15 @@ def find_interpriter(device_info):
 
 
 if __name__ == '__main__':
+
+  if (cfg.LOG_LEVEL.upper() == "ERROR"):
+    logging.basicConfig(encoding='utf-8', level=logging.ERROR)
+  elif (cfg.LOG_LEVEL.upper() == "WARN"):
+    logging.basicConfig(encoding='utf-8', level=logging.WARN)
+  elif (cfg.LOG_LEVEL.upper() == "INFO"):
+    logging.basicConfig(encoding='utf-8', level=logging.INFO)
+  else:
+    logging.basicConfig(encoding='utf-8', level=logging.DEBUG)
 
   logger.info("START")
 
