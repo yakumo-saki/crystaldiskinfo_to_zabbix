@@ -8,8 +8,6 @@ from pprint import pprint
 
 import config as cfg
 
-import modules.zabbix_parsed as zbx_parsed
-import modules.zabbix_smart as zbx_smart
 import modules.cdi_parser as parser
 
 logger = logging.getLogger(__name__)
