@@ -107,7 +107,6 @@ def parse_diskdetail_smart_non_nvme(smart, line):
     ln = line.strip()
 
     smartAttr = ln.split(" ", maxsplit=5)  # Attribute Name部はスペースが入りうるので個数指定
-    logger.debug(smartAttr)
     smart["id"] = smartAttr[0].strip()
     smart["name"] = smartAttr[5].strip()
     smart["value"] = parse_smart_value(smartAttr[1])
