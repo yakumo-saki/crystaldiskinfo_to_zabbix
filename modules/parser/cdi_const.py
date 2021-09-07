@@ -12,6 +12,7 @@ RS_DISK_DETAIL = {
     "model": None,
     "firmware": None,
     "serialNumber": None,
+    "interface": None,
     "diskSize": None,
     "powerOnHours": None,
     "powerOnCount": None,

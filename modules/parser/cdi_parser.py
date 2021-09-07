@@ -116,5 +116,8 @@ def parse(path):
     logger.info("parse done")
 
     import json
-    pprint(result)
+    
+    with open('./example_data/parsed.json', 'w', encoding='UTF-8') as f:
+        f.write(json.dumps(result, indent=2, ensure_ascii=False))
+
     return result
