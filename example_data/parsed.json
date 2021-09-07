@@ -63,9 +63,9 @@
       "serialNumber": "***************",
       "interface": "Serial ATA",
       "diskSize": 3000500000000,
-      "powerOnHours": "62382 時間",
-      "powerOnCount": "745 回",
-      "temperature": "40 C (104 F)",
+      "powerOnHours": 62382,
+      "powerOnCount": 745,
+      "temperature": 40,
       "healthStatus": "正常",
       "smart": [
         {
@@ -196,9 +196,9 @@
       "serialNumber": "***************",
       "interface": "Serial ATA",
       "diskSize": 3000500000000,
-      "powerOnHours": "73713 時間",
-      "powerOnCount": "769 回",
-      "temperature": "39 C (102 F)",
+      "powerOnHours": 73713,
+      "powerOnCount": 769,
+      "temperature": 39,
       "healthStatus": "正常",
       "smart": [
         {
@@ -329,9 +329,9 @@
       "serialNumber": "***************",
       "interface": "Serial ATA",
       "diskSize": 3000500000000,
-      "powerOnHours": "63429 時間",
-      "powerOnCount": "473 回",
-      "temperature": "36 C (96 F)",
+      "powerOnHours": 63429,
+      "powerOnCount": 473,
+      "temperature": 36,
       "healthStatus": "正常",
       "smart": [
         {
@@ -462,9 +462,9 @@
       "serialNumber": "***************",
       "interface": "Serial ATA",
       "diskSize": 3000500000000,
-      "powerOnHours": "76265 時間",
-      "powerOnCount": "813 回",
-      "temperature": "36 C (96 F)",
+      "powerOnHours": 76265,
+      "powerOnCount": 813,
+      "temperature": 36,
       "healthStatus": "正常",
       "smart": [
         {
@@ -595,9 +595,9 @@
       "serialNumber": "************",
       "interface": "Serial ATA",
       "diskSize": 500100000000,
-      "powerOnHours": "168 時間",
-      "powerOnCount": "5 回",
-      "temperature": "36 C (96 F)",
+      "powerOnHours": 168,
+      "powerOnCount": 5,
+      "temperature": 36,
       "healthStatus": "正常",
       "smart": [
         {
@@ -784,9 +784,9 @@
       "serialNumber": "***************",
       "interface": "Serial ATA",
       "diskSize": 250000000000,
-      "powerOnHours": "25941 時間",
-      "powerOnCount": "291 回",
-      "temperature": "36 C (96 F)",
+      "powerOnHours": 25941,
+      "powerOnCount": 291,
+      "temperature": 36,
       "healthStatus": "正常 (56 %)",
       "smart": [
         {
@@ -896,9 +896,9 @@
       "serialNumber": "************",
       "interface": "Serial ATA",
       "diskSize": 120000000000,
-      "powerOnHours": "29061 時間",
-      "powerOnCount": "164 回",
-      "temperature": "40 C (104 F)",
+      "powerOnHours": 29061,
+      "powerOnCount": 164,
+      "temperature": 40,
       "healthStatus": "正常 (52 %)",
       "smart": [
         {
@@ -1085,9 +1085,9 @@
       "serialNumber": "************",
       "interface": "Serial ATA",
       "diskSize": 250000000000,
-      "powerOnHours": "48749 時間",
-      "powerOnCount": "347 回",
-      "temperature": "42 C (107 F)",
+      "powerOnHours": 48749,
+      "powerOnCount": 347,
+      "temperature": 42,
       "healthStatus": "正常 (30 %)",
       "smart": [
         {
@@ -1260,9 +1260,9 @@
       "serialNumber": "************",
       "interface": "NVM Express",
       "diskSize": 512100000000,
-      "powerOnHours": "1054 時間",
-      "powerOnCount": "12 回",
-      "temperature": "43 C (109 F)",
+      "powerOnHours": 1054,
+      "powerOnCount": 12,
+      "temperature": 43,
       "healthStatus": "正常 (89 %)",
       "smart": [
         {

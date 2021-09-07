@@ -43,7 +43,10 @@ def parse_diskdetail_body(detail, line):
     }
 
     convmaps = {
-        "Disk Size": _diskSize
+        "Disk Size": _diskSize,
+        "Power On Hours": _deleteUnit,
+        "Power On Count": _deleteUnit,
+        "Temperature": _deleteUnit
     }
 
     for k, v in keymaps.items():
@@ -77,3 +80,7 @@ def _diskSize(value):
         return int(num * Unit.TiB)
 
     return num
+
+
+def _deleteUnit(value):
+    return int(value[0:value.index(" ")])
