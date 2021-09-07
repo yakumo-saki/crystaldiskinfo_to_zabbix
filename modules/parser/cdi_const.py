@@ -11,13 +11,13 @@ RS_DISK_DETAIL = {
     "id": None,
     "model": None,
     "firmware": None,
-    "SerialNumber": None,
-    "DiskSize": None,
-    "PowerOnHours": None,
-    "PowerOnCount": None,
-    "Temperature": None,
-    "HealthStatus": None,
-    "Smart": []
+    "serialNumber": None,
+    "diskSize": None,
+    "powerOnHours": None,
+    "powerOnCount": None,
+    "temperature": None,
+    "healthStatus": None,
+    "smart": []
 }
 
 """SMART値部分のデータ雛形"""

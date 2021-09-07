@@ -33,21 +33,45 @@ def parse_disklist(line):
 """ディスク詳細のヘッダの名前を1行解釈する
 cf) "(01) WDC WD30EFRX-68EUZN0"
 """
-def parse_diskdetail_header(datail, line):
-    print("DISK_DETAIL_HEAD " + line)
-    return {}
+def parse_diskdetail_header(detail, line):
+    ln = line.strip()
+
+    detail["id"] = ln[0:4]    # "(01)"
+    detail["model"] = ln[5:].strip()   # "WDC WD30EFRX-68AX9N0"
+
+    return None
 
 
 """ディスク詳細を1行解釈してdetailに追加する
 cf) "           Model : WDC WD30EFRX-68AX9N0"
 """
-def parse_diskdetail_body(datail, line):
-    #print("DISK_DETAIL_BODY " + line)
+def parse_diskdetail_body(detail, line):
+    ln = line.strip()
+
+    attr = ln.split(":", maxsplit=1)
+    key = attr[0].strip()
+    value = attr[1].strip()
+
+    # CDI出力 -> key
+    maps = {
+        "Firmware": "firmware",
+        "Serial Number": "serialNumber",
+        "Disk Size": "diskSize", 
+        "Power On Hours": "powerOnHours",
+        "Power On Count": "powerOnCount",
+        "Temperature": "temperature",
+        "Health Status": "healthStatus"
+    }
+
+    for k, v in maps.items():
+        if (key == k):
+            detail[v] = value
+
     return None
 
 """ディスク詳細のSMART部を1行解釈してdetail.smartに追加する
 cf) "01 200 200 _51 000000000000 リードエラーレート"
 """
-def parse_diskdetail_smart(datail, line):
+def parse_diskdetail_smart(detail, line):
     #print("SMART " + line)
     return None

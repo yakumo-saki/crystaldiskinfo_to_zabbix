@@ -67,6 +67,7 @@ def parse(path):
                     logger.debug("NEXT DISK_DETAIL_BODY")
                 else:
                     detail = copy.deepcopy(RS_DISK_DETAIL)
+                    result["diskDetail"].append(detail)
                     oneline.parse_diskdetail_header(detail, line)
 
                 continue
