@@ -1,8 +1,8 @@
 import logging
 from pprint import pprint
 from modules.const import Keys
-import modules.cdi_parser_oneline as oneline
-from modules.cdi_const import RS_DISK_DETAIL, RS_DISKLIST
+import modules.parser.cdi_parser_oneline as oneline
+from modules.parser.cdi_const import RS_DISK_DETAIL, RS_DISKLIST
 
 logger = logging.getLogger(__name__)
 

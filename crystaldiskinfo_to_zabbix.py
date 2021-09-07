@@ -1,14 +1,11 @@
 from pyzabbix import ZabbixMetric, ZabbixSender
 
-import interpriters
-import json
 import logging
-import subprocess
 from pprint import pprint
 
 import config as cfg
 
-import modules.cdi_parser as parser
+import modules.parser.cdi_parser as parser
 
 logger = logging.getLogger(__name__)
 

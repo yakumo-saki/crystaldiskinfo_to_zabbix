@@ -4,7 +4,7 @@ import config as cfg
 
 from modules.const import Keys, AttrKey
 
-from modules.zabbix_sender import send_to_zabbix
+from modules.zabbix.zabbix_sender import send_to_zabbix
 
 logger = logging.getLogger(__name__)
 

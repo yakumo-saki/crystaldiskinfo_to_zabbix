@@ -1,6 +1,6 @@
 import logging
 from modules.const import Keys
-from modules.cdi_const import RS_DISKLIST, RS_DISK_SMART
+from modules.parser.cdi_const import RS_DISKLIST, RS_DISK_SMART
 
 import copy
 
