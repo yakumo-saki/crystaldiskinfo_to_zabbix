@@ -1,5 +1,8 @@
 import logging
+from pprint import pprint
 from modules.const import Keys
+import modules.cdi_parser_oneline as oneline
+from modules.cdi_const import RS_DISK_DETAIL, RS_DISKLIST
 
 logger = logging.getLogger(__name__)
 
@@ -20,46 +23,16 @@ class Pos():
     DISK_DETAIL_END = "DISK_DETAIL_END"  # 次のディスク情報まで読み飛ばし
 
 
-class Result():
-    disklist = []      # key = ID "(01)" "(02)" ... 
-    disk_detail = []   # 
-
-
-# Result.disklist
-RS_DISKLIST = {
-    "id": None,               # "(01)" "(02)" "(03)"
-    "model": None,            # "WDC WD30EFRX-68AX9N0"
-    "commandType": None,      # ここからしか取れない AtaSmart.h commandTypeString
-    "ssdVendorString": None,  # ここからしか取れない AtaSmart.h ssdVendorString
+RESULT = {
+    "diskList": [],     # key = ID "(01)" "(02)" ... 
+    "diskDetail": []   # 
 }
-
-RS_DISK_DETAIL = {
-    "id": None,
-    "model": None,
-    "firmware": None,
-    "SerialNumber": None,
-    "DiskSize": None,
-    "PowerOnHours": None,
-    "PowerOnCount": None,
-    "Temperature": None,
-    "HealthStatus": None,
-    "Smart": []
-}
-
-RS_DISK_SMART = {
-    "id": None,
-    "name": None,
-    "value": None,
-    "worst": None,
-    "threshould": None
-} 
-
 
 def parse(path):
     import copy
 
     now = None   # 現在のブロック
-    result = Result()
+    result = copy.deepcopy(RESULT)
 
     print(path)
     with open(path) as f:
@@ -82,7 +55,7 @@ def parse(path):
                     now = Pos.DISK_DETAIL_HEAD
                     logger.debug("NEXT DISK_DETAIL_HEAD")
                 else:
-                    result.disklist.append(parse_disklist(line))
+                    result["diskList"].append(oneline.parse_disklist(line))
 
                 continue
             elif now == Pos.DISK_DETAIL_HEAD:
@@ -94,7 +67,7 @@ def parse(path):
                     logger.debug("NEXT DISK_DETAIL_BODY")
                 else:
                     detail = copy.deepcopy(RS_DISK_DETAIL)
-                    parse_diskdetail_header(detail, line)
+                    oneline.parse_diskdetail_header(detail, line)
 
                 continue
             elif now == Pos.DISK_DETAIL_BODY:
@@ -106,7 +79,7 @@ def parse(path):
                     now = Pos.DISK_SMART_HEAD
                     logger.debug("NEXT DISK_SMART_HEAD")
                 else:
-                    parse_diskdetail_body(detail, line)
+                    oneline.parse_diskdetail_body(detail, line)
 
                 continue
             elif now == Pos.DISK_SMART_HEAD:
@@ -124,7 +97,7 @@ def parse(path):
                     now = Pos.DISK_DETAIL_END
                     logger.debug("NEXT DISK_DETAIL_END ---------------")
                 else:
-                    parse_diskdetail_smart(detail, line)    
+                    oneline.parse_diskdetail_smart(detail, line)    
 
                 continue
             elif now == Pos.DISK_DETAIL_END:
@@ -139,33 +112,8 @@ def parse(path):
 
                 continue
 
+    logger.info("parse done")
 
-"""ディスク一覧を1行解釈する
-cf) "(01) WDC WD30EFRX-68EUZN0 : 3000.5 GB [X/0/0, mr]"
-"""
-def parse_disklist(line):
-    print("DISKLIST " + line)
-    return {}
-
-
-"""ディスク詳細のヘッダの名前を1行解釈する
-cf) "(01) WDC WD30EFRX-68EUZN0"
-"""
-def parse_diskdetail_header(datail, line):
-    print("DISK_DETAIL_HEAD " + line)
-    return {}
-
-
-"""ディスク詳細を1行解釈してdetailに追加する
-cf) "           Model : WDC WD30EFRX-68AX9N0"
-"""
-def parse_diskdetail_body(datail, line):
-    #print("DISK_DETAIL_BODY " + line)
-    return None
-
-"""ディスク詳細のSMART部を1行解釈してdetail.smartに追加する
-cf) "01 200 200 _51 000000000000 リードエラーレート"
-"""
-def parse_diskdetail_smart(datail, line):
-    #print("SMART " + line)
-    return None
+    import json
+    pprint(result)
+    return result

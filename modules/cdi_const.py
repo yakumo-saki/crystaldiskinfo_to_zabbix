@@ -1,3 +1,35 @@
+"""ディスク一覧部分のデータ雛形"""
+RS_DISKLIST = {
+    "id": None,               # "(01)" "(02)" "(03)"
+    "model": None,            # "WDC WD30EFRX-68AX9N0"
+    "commandType": None,      # ここからしか取れない AtaSmart.h commandTypeString
+    "ssdVendorString": None,  # ここからしか取れない AtaSmart.h ssdVendorString
+}
+
+"""ディスク詳細部分のデータ雛形"""
+RS_DISK_DETAIL = {
+    "id": None,
+    "model": None,
+    "firmware": None,
+    "SerialNumber": None,
+    "DiskSize": None,
+    "PowerOnHours": None,
+    "PowerOnCount": None,
+    "Temperature": None,
+    "HealthStatus": None,
+    "Smart": []
+}
+
+"""SMART値部分のデータ雛形"""
+RS_DISK_SMART = {
+    "id": None,
+    "name": None,
+    "value": None,
+    "worst": None,
+    "threshould": None
+} 
+
+
 """ commandTypeString をわかりやすい文字列にする
 AtaSmart.h
 """
