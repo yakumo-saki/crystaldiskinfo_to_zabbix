@@ -1,7 +1,9 @@
 import logging
 from pprint import pprint
 from modules.const import Keys
-import modules.parser.cdi_parser_oneline as oneline
+from modules.parser.cdi_parser_disklist import parse_disklist
+from modules.parser.cdi_parser_diskdetail import parse_diskdetail_header, parse_diskdetail_body
+from modules.parser.cdi_parser_smart import parse_diskdetail_smart
 from modules.parser.cdi_const import RS_DISK_DETAIL, RS_DISKLIST
 
 logger = logging.getLogger(__name__)
@@ -55,7 +57,7 @@ def parse(path):
                     now = Pos.DISK_DETAIL_HEAD
                     logger.debug("NEXT DISK_DETAIL_HEAD")
                 else:
-                    result["diskList"].append(oneline.parse_disklist(line))
+                    result["diskList"].append(parse_disklist(line))
 
                 continue
             elif now == Pos.DISK_DETAIL_HEAD:
@@ -68,7 +70,7 @@ def parse(path):
                 else:
                     detail = copy.deepcopy(RS_DISK_DETAIL)
                     result["diskDetail"].append(detail)
-                    oneline.parse_diskdetail_header(detail, line)
+                    parse_diskdetail_header(detail, line)
 
                 continue
             elif now == Pos.DISK_DETAIL_BODY:
@@ -80,7 +82,7 @@ def parse(path):
                     now = Pos.DISK_SMART_HEAD
                     logger.debug("NEXT DISK_SMART_HEAD")
                 else:
-                    oneline.parse_diskdetail_body(detail, line)
+                    parse_diskdetail_body(detail, line)
 
                 continue
             elif now == Pos.DISK_SMART_HEAD:
@@ -98,7 +100,7 @@ def parse(path):
                     now = Pos.DISK_DETAIL_END
                     logger.debug("NEXT DISK_DETAIL_END ---------------")
                 else:
-                    oneline.parse_diskdetail_smart(detail, line)    
+                    parse_diskdetail_smart(detail, line)    
 
                 continue
             elif now == Pos.DISK_DETAIL_END:
