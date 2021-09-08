@@ -76,8 +76,9 @@ def parse(path):
             elif now == Pos.DISK_DETAIL_BODY:
 
                 if (line.strip() == ""):
-                    # expected, final empty line
-                    pass
+                    key = _createKey(detail)
+                    detail["key"] = key
+                    logger.debug(f"DISK_DETAIL_BODY END KEY={key}")
                 elif (line.startswith(Keyword.DISK_SMART)):
                     now = Pos.DISK_SMART_HEAD
                     logger.debug("NEXT DISK_SMART_HEAD")
@@ -120,7 +121,20 @@ def parse(path):
     import json
     
     if (cfg.PARSED_JSON != ""):
+        logger.debug(f"Exporting parsed.json: {cfg.PARSED_JSON}")
         with open(cfg.PARSED_JSON, 'w', encoding='UTF-8') as f:
             f.write(json.dumps(result, indent=2, ensure_ascii=False))
 
     return result
+
+
+def _createKey(detail):
+    if (detail["serialNumber"] == "************"):
+        logger.info("Serial Number is hidden. It is not recommended."
+        + " Change setting on CrystalDiskInfo GUI.")
+        model = detail["model"]
+        model = model.replace(" ", "_")
+        return detail["id"] + model
+
+    return detail["serialNumber"]
+    
