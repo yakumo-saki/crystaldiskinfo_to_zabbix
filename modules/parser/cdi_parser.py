@@ -1,10 +1,10 @@
 import logging
 
-import config as cfg
 from modules.parser.cdi_parser_disklist import parse_disklist
 from modules.parser.cdi_parser_diskdetail import parse_diskdetail_header, parse_diskdetail_body
 from modules.parser.cdi_parser_smart import parse_diskdetail_smart
 from modules.parser.cdi_const import RS_DISK_DETAIL, RS_DISKLIST
+from modules.const import Keys
 
 logger = logging.getLogger(__name__)
 
@@ -76,9 +76,10 @@ def parse(path):
             elif now == Pos.DISK_DETAIL_BODY:
 
                 if (line.strip() == ""):
-                    key = _createKey(detail)
-                    detail["key"] = key
-                    logger.debug(f"DISK_DETAIL_BODY END KEY={key}")
+                    detail[Keys.KEY] = _createKey(detail)
+                    detail[Keys.NAME] = _createZabbixName(detail)
+                    
+                    logger.debug(f"DISK_DETAIL_BODY END")
                 elif (line.startswith(Keyword.DISK_SMART)):
                     now = Pos.DISK_SMART_HEAD
                     logger.debug("NEXT DISK_SMART_HEAD")
@@ -118,12 +119,6 @@ def parse(path):
 
     logger.debug("parse done")
 
-    import json
-    if (cfg.PARSED_JSON != ""):
-        logger.debug(f"Exporting parsed.json: {cfg.PARSED_JSON}")
-        with open(cfg.PARSED_JSON, 'w', encoding='UTF-8') as f:
-            f.write(json.dumps(result, indent=2, ensure_ascii=False))
-
     return result
 
 
@@ -131,9 +126,15 @@ def _createKey(detail):
     if (detail["serialNumber"] == "************"):
         logger.info("Serial Number is hidden. It is not recommended."
         + " Change setting on CrystalDiskInfo GUI.")
-        model = detail["model"]
+        model = detail[Keys.MODEL]
         model = model.replace(" ", "_")
-        return detail["id"] + model
+        return detail[Keys.ID] + model
 
     return detail["serialNumber"]
+    
+
+def _createZabbixName(detail):
+    id = detail[Keys.ID]
+    model = detail[Keys.MODEL]
+    return f"{id}{model}"
     

@@ -12,7 +12,8 @@ class Unit():
 class Keys():
 
     ID = "id"
-    KEY = "key"
+    KEY = "key"   # zabbix上のディスクに対する一意なキー 
+    NAME = "name" # zabbix上の表示名
     MODEL = "model"
     FIRMWARE = "firmware"
     SERIAL_NUMBER = "serialNumber"
