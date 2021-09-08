@@ -7,6 +7,7 @@ from pprint import pprint
 import config as cfg
 
 import modules.parser.cdi_parser as parser
+import modules.zabbix.send_device as send_device
 
 logger = logging.getLogger(__name__)
 
@@ -32,6 +33,9 @@ if __name__ == '__main__':
         with open(cfg.PARSED_JSON, 'w', encoding='UTF-8') as f:
             f.write(json.dumps(result, indent=2, ensure_ascii=False))
 
+
+    # CDIの解釈データを送る
+    send_device.send_device_discovery(result)
 
     # SMART全データを送信する
     #zbx_smart.send_attribute_discovery(full_results)

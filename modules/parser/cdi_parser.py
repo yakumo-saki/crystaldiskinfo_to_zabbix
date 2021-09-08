@@ -123,7 +123,9 @@ def parse(path):
 
 
 def _createKey(detail):
-    if (detail["serialNumber"] == "************"):
+    # serialNumberは本当のシリアル番号の桁数を反映している。
+    # さすがに3桁のシリアル番号はないと思うのでこれで判定する
+    if (detail["serialNumber"].startswith("***")):
         logger.info("Serial Number is hidden. It is not recommended."
         + " Change setting on CrystalDiskInfo GUI.")
         model = detail[Keys.MODEL]

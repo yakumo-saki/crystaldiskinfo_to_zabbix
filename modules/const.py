@@ -1,3 +1,4 @@
+from dataclasses import dataclass
 class Unit():
     KB = 1024
     MB = 1024 * 1024
@@ -41,12 +42,17 @@ class Keys():
         return f"crystaldisk.{key}"
 
 
+@dataclass
 class DeviceKey():
     """Zabbixのデバイスディスカバリに使うキー
     """
+
+
     ZBX_KEY = 'crystaldisk.discovery.device'
-    DISK_KEY = '{#KEY}'    # アイテムキーに使うキー (シリアルNO)
-    DISK_NAME = '{#NAME}'  # 表示名
+    DISK_KEY = '{#KEY}'
+    """ アイテムキーに使うキー (シリアルNO)"""
+    DISK_NAME = '{#NAME}'
+    """ 表示名 """
 
 
 class AttrKey():
