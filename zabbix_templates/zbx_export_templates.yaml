@@ -1,0 +1,238 @@
+zabbix_export:
+  version: '5.2'
+  date: '2021-09-08T15:33:38Z'
+  groups:
+    -
+      name: Templates
+  templates:
+    -
+      template: 'CrystalDiskInfo to ZABBIX 20210908 by yakumo-saki'
+      name: 'CrystalDiskInfo to ZABBIX 20210908 by yakumo-saki'
+      description: 'https://github.com/yakumo-saki/crystaldiskinfo_to_zabbix/'
+      groups:
+        -
+          name: Templates
+      applications:
+        -
+          name: CrystalDiskInfo
+        -
+          name: Disk
+        -
+          name: SMART
+      discovery_rules:
+        -
+          name: 'CrystalDiskInfo: Device discovery'
+          type: TRAP
+          key: crystaldisk.discovery.device
+          delay: '0'
+          description: 'Device discovery.'
+          item_prototypes:
+            -
+              name: 'CrystalDiskInfo: Disk Size [{#NAME}]'
+              type: TRAP
+              key: 'crystaldisk.diskSize[{#KEY}]'
+              delay: '0'
+              units: bytes
+              applications:
+                -
+                  name: CrystalDiskInfo
+                -
+                  name: Disk
+            -
+              name: 'CrystalDiskInfo: Firmware [{#NAME}]'
+              type: TRAP
+              key: 'crystaldisk.firmware[{#KEY}]'
+              delay: '0'
+              trends: '0'
+              value_type: CHAR
+              applications:
+                -
+                  name: CrystalDiskInfo
+                -
+                  name: Disk
+            -
+              name: 'CrystalDiskInfo: Health Status [{#NAME}]'
+              type: TRAP
+              key: 'crystaldisk.healthStatus[{#KEY}]'
+              delay: '0'
+              trends: '0'
+              value_type: CHAR
+              applications:
+                -
+                  name: CrystalDiskInfo
+                -
+                  name: Disk
+            -
+              name: 'CrystalDiskInfo:  Host Reads [{#NAME}]'
+              type: TRAP
+              key: 'crystaldisk.hostReads[{#KEY}]'
+              delay: '0'
+              units: bytes
+              description: |
+                Only on CrystalDiskInfo known SSDs.
+                Only on SSD report this
+                Minimum unit GB
+              applications:
+                -
+                  name: CrystalDiskInfo
+                -
+                  name: Disk
+            -
+              name: 'CrystalDiskInfo:  Host Writes [{#NAME}]'
+              type: TRAP
+              key: 'crystaldisk.hostWrites[{#KEY}]'
+              delay: '0'
+              units: bytes
+              description: |
+                Only on CrystalDiskInfo known SSDs.
+                Only on SSD report this
+                Minimum unit GB
+              applications:
+                -
+                  name: CrystalDiskInfo
+                -
+                  name: Disk
+            -
+              name: 'CrystalDiskInfo: SSD Life [{#NAME}]'
+              type: TRAP
+              key: 'crystaldisk.lifespan[{#KEY}]'
+              delay: '0'
+              units: '%'
+              description: 'CrystalDiskInfo known SSD only.'
+              applications:
+                -
+                  name: CrystalDiskInfo
+                -
+                  name: Disk
+            -
+              name: 'CrystalDiskInfo: Model [{#NAME}]'
+              type: TRAP
+              key: 'crystaldisk.model[{#KEY}]'
+              delay: '0'
+              trends: '0'
+              value_type: CHAR
+              applications:
+                -
+                  name: CrystalDiskInfo
+                -
+                  name: Disk
+            -
+              name: 'CrystalDiskInfo: NAND Writes [{#NAME}]'
+              type: TRAP
+              key: 'crystaldisk.nandWrites[{#KEY}]'
+              delay: '0'
+              units: bytes
+              description: |
+                Only on CrystalDiskInfo known SSDs.
+                Only on SSD report this (WD/SanDisk only?)
+                Minimum unit GB
+              applications:
+                -
+                  name: CrystalDiskInfo
+                -
+                  name: Disk
+            -
+              name: 'CrystalDiskInfo: Power On Count [{#NAME}]'
+              type: TRAP
+              key: 'crystaldisk.powerOnCount[{#KEY}]'
+              delay: '0'
+              units: '!'
+              applications:
+                -
+                  name: CrystalDiskInfo
+                -
+                  name: Disk
+            -
+              name: 'CrystalDiskInfo: Power On Hours [{#NAME}]'
+              type: TRAP
+              key: 'crystaldisk.powerOnHours[{#KEY}]'
+              delay: '0'
+              units: '!hours'
+              applications:
+                -
+                  name: CrystalDiskInfo
+                -
+                  name: Disk
+            -
+              name: 'CrystalDiskInfo: Serial Number [{#NAME}]'
+              type: TRAP
+              key: 'crystaldisk.serialNumber[{#KEY}]'
+              delay: '0'
+              trends: '0'
+              value_type: CHAR
+              applications:
+                -
+                  name: CrystalDiskInfo
+                -
+                  name: Disk
+            -
+              name: 'CrystalDiskInfo: Temperature [{#NAME}]'
+              type: TRAP
+              key: 'crystaldisk.temperature[{#KEY}]'
+              delay: '0'
+              units: C
+              applications:
+                -
+                  name: CrystalDiskInfo
+                -
+                  name: Disk
+            -
+              name: 'CrystalDiskInfo: SSD Wear Level Count [{#NAME}]'
+              type: TRAP
+              key: 'crystaldisk.wearLevelCount[{#KEY}]'
+              delay: '0'
+              units: '!'
+              description: |
+                Only on CrystalDiskInfo known SSDs.
+                Only on SSD report this
+                Minimum unit GB
+              applications:
+                -
+                  name: CrystalDiskInfo
+                -
+                  name: Disk
+        -
+          name: 'CrystalDiskInfo: SMART attribute discovery'
+          type: TRAP
+          key: crystaldisk.discovery.smart
+          delay: '0'
+          description: |
+            Discovery for S.M.A.R.T attributes.
+            This creates (device * smart attribute) items
+          item_prototypes:
+            -
+              name: 'CrystalDiskInfo: SMART Threshould {#ID} {#ATTRNAME} [{#NAME}]'
+              type: TRAP
+              key: 'crystaldisk.smart.threshould[{#ID},{#KEY}]'
+              delay: '0'
+              applications:
+                -
+                  name: CrystalDiskInfo
+                -
+                  name: Disk
+                -
+                  name: SMART
+            -
+              name: 'CrystalDiskInfo: SMART Value {#ID} {#ATTRNAME} [{#NAME}]'
+              type: TRAP
+              key: 'crystaldisk.smart.value[{#ID},{#KEY}]'
+              delay: '0'
+              applications:
+                -
+                  name: CrystalDiskInfo
+                -
+                  name: Disk
+                -
+                  name: SMART
+            -
+              name: 'CrystalDiskInfo: SMART Worst {#ID} {#ATTRNAME} [{#NAME}]'
+              type: TRAP
+              key: 'crystaldisk.smart.worst[{#ID},{#KEY}]'
+              delay: '0'
+              applications:
+                -
+                  name: CrystalDiskInfo
+                -
+                  name: Disk
+                -
+                  name: SMART
