@@ -42,24 +42,26 @@ def send_device_discovery(data):
   return None
 
 
-def send_parsed_data(data):
+def send_device_data(data):
   logger.info("Send data to zabbix")
 
+  diskDetails = data["diskDetail"]
+
+  NO_SEND = [Keys.ID, Keys.KEY, Keys.NAME, Keys.INTERFACE, Keys.SMART]
+
   results = []
-  for dev in data:
-    detail = data[dev]  # /dev/sda
-    
-    for key in detail:
-      if detail[key] != None:  # key exists ?
+  for disk in diskDetails:
+    for key in disk.keys():
+      if key in NO_SEND: continue
+
+      if disk[key] != None:  # Noneを送っても意味がないので送らない
         results.append({
           "host": cfg.ZABBIX_HOST,
-          "key": Keys.zabbix_key(key, dev),
-          "value": detail[key]
+          "key": Keys.zabbix_key(key, disk[Keys.KEY]),
+          "value": disk[key]
         })
 
   sender_data = {"request": "sender data", "data": results}
-  #valueStr = json.dumps({"data": discovery_result})
-  # print(json.dumps(sender_data, indent=2))
 
   send_to_zabbix(sender_data)
 

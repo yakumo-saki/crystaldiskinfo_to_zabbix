@@ -36,6 +36,7 @@ if __name__ == '__main__':
 
     # CDIの解釈データを送る
     send_device.send_device_discovery(result)
+    send_device.send_device_data(result)
 
     # SMART全データを送信する
     #zbx_smart.send_attribute_discovery(full_results)
