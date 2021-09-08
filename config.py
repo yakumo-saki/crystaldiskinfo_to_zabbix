@@ -14,3 +14,4 @@ ZABBIX_HOST = os.environ.get('ZABBIX_HOST', None)
 LOG_LEVEL = os.environ.get('LOG_LEVEL', "INFO")
 PARSED_JSON = os.environ.get('PARSED_JSON', "")
 
+ABORT_WHEN_HIDE_SN = bool(os.environ.get('ABORT_WHEN_HIDE_SN', "False"))

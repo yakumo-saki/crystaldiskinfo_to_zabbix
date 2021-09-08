@@ -1,4 +1,5 @@
 import logging
+import config as cfg
 
 from modules.parser.cdi_parser_disklist import parse_disklist
 from modules.parser.cdi_parser_diskdetail import parse_diskdetail_header, parse_diskdetail_body
@@ -91,7 +92,7 @@ def parse(path):
                 # ID Cur Wor Thr の行。読まない
 
                 if (line.strip() == ""):
-                    raise "Unexpected"
+                    raise RuntimeError("Unexpected empty line")
                 else:
                     now = Pos.DISK_SMART_BODY
                     logger.debug("NEXT DISK_SMART_BODY")
@@ -126,12 +127,21 @@ def _createKey(detail):
     # serialNumberは本当のシリアル番号の桁数を反映している。
     # さすがに3桁のシリアル番号はないと思うのでこれで判定する
     if (detail["serialNumber"].startswith("***")):
+
+        CHANGE_SETTING = f" Change setting on CrystalDiskInfo GUI."
+
+        if (cfg.ABORT_WHEN_HIDE_SN):
+            logger.error("ABORT: Serial Number is hidden and"
+            + " ABORT_WHEN_HIDE_SN is set."
+            + f" {CHANGE_SETTING}")
+            raise RuntimeError("Serial Number is hidden")
+
         model = detail[Keys.MODEL]
         model = model.replace(" ", "_")
         key = detail[Keys.ID] + model
 
         logger.warn("Serial Number is hidden. It is not recommended."
-        + f" Change setting on CrystalDiskInfo GUI. {key}")
+        + f" {CHANGE_SETTING} {key}")
         return key
 
     return detail["serialNumber"]
