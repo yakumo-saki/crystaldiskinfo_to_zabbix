@@ -12,6 +12,9 @@ class Unit():
 
 class Keys():
 
+    DISK_LIST = "diskList"
+    DISK_DETAIL = "diskDetail"
+
     ID = "id"
     KEY = "key"   # zabbix上のディスクに対する一意なキー 
     NAME = "name" # zabbix上の表示名
@@ -66,9 +69,13 @@ class AttrKey():
     DISK_KEY = '{#KEY}'    # アイテムキーに使うキー (シリアルNO)
     DISK_NAME = "{#NAME}"
     ATTR_NAME = "{#ATTRNAME}"
-    ATTR_ID = "{#ATTRID}"
+    ATTR_ID = "{#ID}"
 
     # {0} = device  {1} = attr id
     THRESH_KEY = "crystaldisk.smart.threshould[{0},{1}]"
     VALUE_KEY = "crystaldisk.smart.value[{0},{1}]"
     WORST_KEY = "crystaldisk.smart.worst[{0},{1}]"
+
+    @classmethod
+    def zabbix_key(cls, smartId, smartValueType, diskKey):
+        return f"crystaldisk.smart.{smartValueType}[{smartId},{diskKey}]"

@@ -13,3 +13,4 @@ ZABBIX_PORT = int(os.environ.get('ZABBIX_PORT', "10051"))
 ZABBIX_HOST = os.environ.get('ZABBIX_HOST', None)
 LOG_LEVEL = os.environ.get('LOG_LEVEL', "INFO")
 PARSED_JSON = os.environ.get('PARSED_JSON', "")
+

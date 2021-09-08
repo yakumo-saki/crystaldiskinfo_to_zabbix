@@ -8,6 +8,7 @@ import config as cfg
 
 import modules.parser.cdi_parser as parser
 import modules.zabbix.send_device as send_device
+import modules.zabbix.send_smart as send_smart
 
 logger = logging.getLogger(__name__)
 
@@ -41,7 +42,7 @@ if __name__ == '__main__':
     send_device.send_device_data(result)
 
     # SMART全データを送信する
-    #zbx_smart.send_attribute_discovery(full_results)
-    #zbx_smart.send_smart_data(full_results)
+    send_smart.send_attribute_discovery(result)
+    send_smart.send_smart_data(result)
 
     logger.debug("END")
