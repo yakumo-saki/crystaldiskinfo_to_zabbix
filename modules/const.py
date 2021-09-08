@@ -24,6 +24,10 @@ class Keys():
     POWER_ON_COUNT = "powerOnCount"
     TEMPERATURE = "temperature"
     HEALTH_STATUS = "healthStatus"
+    HOST_WRITES = "hostWrites"
+    HOST_READS = "hostReads"
+    NAND_WRITES = "nandWrites"
+    WEAR_LEVEL_COUNT = "wearLevelCount"
     LIFESPAN = "lifespan"
     SMART = "smart"
 

@@ -126,11 +126,13 @@ def _createKey(detail):
     # serialNumberは本当のシリアル番号の桁数を反映している。
     # さすがに3桁のシリアル番号はないと思うのでこれで判定する
     if (detail["serialNumber"].startswith("***")):
-        logger.info("Serial Number is hidden. It is not recommended."
-        + " Change setting on CrystalDiskInfo GUI.")
         model = detail[Keys.MODEL]
         model = model.replace(" ", "_")
-        return detail[Keys.ID] + model
+        key = detail[Keys.ID] + model
+
+        logger.warn("Serial Number is hidden. It is not recommended."
+        + f" Change setting on CrystalDiskInfo GUI. {key}")
+        return key
 
     return detail["serialNumber"]
     
