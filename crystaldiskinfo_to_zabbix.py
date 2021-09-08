@@ -1,5 +1,6 @@
 from pyzabbix import ZabbixMetric, ZabbixSender
 
+import json
 import logging
 from pprint import pprint
 
@@ -23,7 +24,14 @@ if __name__ == '__main__':
 
     logger.info("START")
 
-    parser.parse(cfg.DISKINFO_TXT)
+    result = parser.parse(cfg.DISKINFO_TXT)
+
+    # for debug purpose, export parsed.json if configured
+    if (cfg.PARSED_JSON != ""):
+        logger.debug(f"Exporting parsed.json: {cfg.PARSED_JSON}")
+        with open(cfg.PARSED_JSON, 'w', encoding='UTF-8') as f:
+            f.write(json.dumps(result, indent=2, ensure_ascii=False))
+
 
     # SMART全データを送信する
     #zbx_smart.send_attribute_discovery(full_results)
