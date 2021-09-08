@@ -1,35 +1,37 @@
+from modules.const import Keys
+
 """ディスク一覧部分のデータ雛形"""
 RS_DISKLIST = {
-    "id": None,               # "(01)" "(02)" "(03)"
-    "model": None,            # "WDC WD30EFRX-68AX9N0"
+    Keys.ID: None,               # "(01)" "(02)" "(03)"
+    Keys.MODEL: None,            # "WDC WD30EFRX-68AX9N0"
     "commandType": None,      # ここからしか取れない AtaSmart.h commandTypeString
     "ssdVendorString": None,  # ここからしか取れない AtaSmart.h ssdVendorString
 }
 
 """ディスク詳細部分のデータ雛形"""
 RS_DISK_DETAIL = {
-    "id": None,               # "(01)" "(02)" "(03)"
-    "key": None,              # SerialNo or (no serialNo) id + model
-    "model": None,
-    "firmware": None,
-    "serialNumber": None,
-    "interface": None,
-    "diskSize": None,
-    "powerOnHours": None,
-    "powerOnCount": None,
-    "temperature": None,
-    "healthStatus": None,
-    "lifespan": None,
-    "smart": []
+    Keys.ID: None,               # "(01)" "(02)" "(03)"
+    Keys.KEY: None,              # SerialNo or (no serialNo) id + model
+    Keys.MODEL: None,
+    Keys.FIRMWARE: None,
+    Keys.SERIAL_NUMBER: None,
+    Keys.INTERFACE: None,
+    Keys.DISK_SIZE: None,
+    Keys.POWER_ON_HOURS: None,
+    Keys.POWER_ON_COUNT: None,
+    Keys.TEMPERATURE: None,
+    Keys.HEALTH_STATUS: None,
+    Keys.LIFESPAN: None,
+    Keys.SMART: []
 }
 
 """SMART値部分のデータ雛形"""
 RS_DISK_SMART = {
-    "id": None,
-    "name": None,
-    "value": None,
-    "worst": None,
-    "threshould": None
+    Keys.SMART_ID: None,
+    Keys.SMART_NAME: None,
+    Keys.SMART_VALUE: None,
+    Keys.SMART_WORST: None,
+    Keys.SMART_THRESH: None
 } 
 
 

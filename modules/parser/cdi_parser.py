@@ -119,7 +119,6 @@ def parse(path):
     logger.debug("parse done")
 
     import json
-    
     if (cfg.PARSED_JSON != ""):
         logger.debug(f"Exporting parsed.json: {cfg.PARSED_JSON}")
         with open(cfg.PARSED_JSON, 'w', encoding='UTF-8') as f:

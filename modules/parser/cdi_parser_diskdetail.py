@@ -1,9 +1,6 @@
 import logging
 
-from modules.const import Unit
-from modules.parser.cdi_const import RS_DISKLIST, RS_DISK_SMART
-
-import copy
+from modules.const import Keys, Unit
 
 logger = logging.getLogger(__name__)
 
@@ -14,8 +11,8 @@ cf) "(01) WDC WD30EFRX-68EUZN0"
 def parse_diskdetail_header(detail, line):
     ln = line.strip()
 
-    detail["id"] = ln[0:4]    # "(01)"
-    detail["model"] = ln[5:].strip()   # "WDC WD30EFRX-68AX9N0"
+    detail[Keys.ID] = ln[0:4]    # "(01)"
+    detail[Keys.MODEL] = ln[5:].strip()   # "WDC WD30EFRX-68AX9N0"
 
     return None
 
@@ -32,14 +29,14 @@ def parse_diskdetail_body(detail, line):
 
     # CDI出力 -> key
     keymaps = {
-        "Firmware": "firmware",
-        "Serial Number": "serialNumber",
-        "Disk Size": "diskSize",
-        "Interface": "interface",
-        "Power On Hours": "powerOnHours",
-        "Power On Count": "powerOnCount",
-        "Temperature": "temperature",
-        "Health Status": "healthStatus"
+        "Firmware": Keys.FIRMWARE,
+        "Serial Number": Keys.SERIAL_NUMBER,
+        "Disk Size": Keys.DISK_SIZE,
+        "Interface": Keys.INTERFACE,
+        "Power On Hours": Keys.POWER_ON_HOURS,
+        "Power On Count": Keys.POWER_ON_COUNT,
+        "Temperature": Keys.TEMPERATURE,
+        "Health Status": Keys.HEALTH_STATUS
     }
 
     convmaps = {
@@ -53,8 +50,8 @@ def parse_diskdetail_body(detail, line):
         if (key == k):
             if (key == "Health Status"):
                 (status, life) = _parseHealth(value)
-                detail["healthStatus"] = status
-                detail["lifespan"] = life
+                detail[Keys.HEALTH_STATUS] = status
+                detail[Keys.LIFESPAN] = life
             elif (key in convmaps):
                 # 変換用メソッドがある
                 detail[v] = convmaps[key](value)
