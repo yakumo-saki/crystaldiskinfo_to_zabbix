@@ -20,10 +20,12 @@ if __name__ == '__main__':
         logging.basicConfig(encoding='utf-8', level=logging.WARN)
     elif (cfg.LOG_LEVEL.upper() == "INFO"):
         logging.basicConfig(encoding='utf-8', level=logging.INFO)
-    else:
+    elif (cfg.LOG_LEVEL.upper() == "DEBUG"):
         logging.basicConfig(encoding='utf-8', level=logging.DEBUG)
+    else:
+        logging.basicConfig(encoding='utf-8', level=logging.INFO)
 
-    logger.info("START")
+    logger.debug("START")
 
     result = parser.parse(cfg.DISKINFO_TXT)
 
@@ -42,4 +44,4 @@ if __name__ == '__main__':
     #zbx_smart.send_attribute_discovery(full_results)
     #zbx_smart.send_smart_data(full_results)
 
-    logger.info("END")
+    logger.debug("END")
