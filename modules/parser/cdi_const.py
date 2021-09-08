@@ -8,7 +8,8 @@ RS_DISKLIST = {
 
 """ディスク詳細部分のデータ雛形"""
 RS_DISK_DETAIL = {
-    "id": None,
+    "id": None,               # "(01)" "(02)" "(03)"
+    "key": None,              # SerialNo or (no serialNo) id + model
     "model": None,
     "firmware": None,
     "serialNumber": None,
@@ -18,6 +19,7 @@ RS_DISK_DETAIL = {
     "powerOnCount": None,
     "temperature": None,
     "healthStatus": None,
+    "lifespan": None,
     "smart": []
 }
 

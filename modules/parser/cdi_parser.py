@@ -1,6 +1,6 @@
 import logging
-from pprint import pprint
-from modules.const import Keys
+
+import config as cfg
 from modules.parser.cdi_parser_disklist import parse_disklist
 from modules.parser.cdi_parser_diskdetail import parse_diskdetail_header, parse_diskdetail_body
 from modules.parser.cdi_parser_smart import parse_diskdetail_smart
@@ -36,7 +36,7 @@ def parse(path):
     now = None   # 現在のブロック
     result = copy.deepcopy(RESULT)
 
-    print(path)
+    logger.debug(f"Opening file: {path}")
     with open(path) as f:
 
         detail = None
@@ -115,11 +115,12 @@ def parse(path):
 
                 continue
 
-    logger.info("parse done")
+    logger.debug("parse done")
 
     import json
     
-    with open('./example_data/parsed.json', 'w', encoding='UTF-8') as f:
-        f.write(json.dumps(result, indent=2, ensure_ascii=False))
+    if (cfg.PARSED_JSON != ""):
+        with open(cfg.PARSED_JSON, 'w', encoding='UTF-8') as f:
+            f.write(json.dumps(result, indent=2, ensure_ascii=False))
 
     return result

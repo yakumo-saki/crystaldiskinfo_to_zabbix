@@ -58,6 +58,7 @@
   "diskDetail": [
     {
       "id": "(01)",
+      "key": null,
       "model": "WDC WD30EFRX-68EUZN0",
       "firmware": "80.00A80",
       "serialNumber": "***************",
@@ -67,6 +68,7 @@
       "powerOnCount": 745,
       "temperature": 40,
       "healthStatus": "正常",
+      "lifespan": null,
       "smart": [
         {
           "id": "01",
@@ -191,6 +193,7 @@
     },
     {
       "id": "(02)",
+      "key": null,
       "model": "WDC WD30EFRX-68AX9N0",
       "firmware": "80.00A80",
       "serialNumber": "***************",
@@ -200,6 +203,7 @@
       "powerOnCount": 769,
       "temperature": 39,
       "healthStatus": "正常",
+      "lifespan": null,
       "smart": [
         {
           "id": "01",
@@ -324,6 +328,7 @@
     },
     {
       "id": "(03)",
+      "key": null,
       "model": "WDC WD30EFRX-68EUZN0",
       "firmware": "80.00A80",
       "serialNumber": "***************",
@@ -333,6 +338,7 @@
       "powerOnCount": 473,
       "temperature": 36,
       "healthStatus": "正常",
+      "lifespan": null,
       "smart": [
         {
           "id": "01",
@@ -457,6 +463,7 @@
     },
     {
       "id": "(04)",
+      "key": null,
       "model": "WDC WD30EFRX-68AX9N0",
       "firmware": "80.00A80",
       "serialNumber": "***************",
@@ -466,6 +473,7 @@
       "powerOnCount": 813,
       "temperature": 36,
       "healthStatus": "正常",
+      "lifespan": null,
       "smart": [
         {
           "id": "01",
@@ -590,6 +598,7 @@
     },
     {
       "id": "(05)",
+      "key": null,
       "model": "WDC  WDS500G2B0A-00SM50",
       "firmware": "415020WD",
       "serialNumber": "************",
@@ -599,6 +608,7 @@
       "powerOnCount": 5,
       "temperature": 36,
       "healthStatus": "正常",
+      "lifespan": null,
       "smart": [
         {
           "id": "05",
@@ -779,6 +789,7 @@
     },
     {
       "id": "(06)",
+      "key": null,
       "model": "Samsung SSD 850 EVO 250GB",
       "firmware": "EMT03B6Q",
       "serialNumber": "***************",
@@ -787,7 +798,8 @@
       "powerOnHours": 25941,
       "powerOnCount": 291,
       "temperature": 36,
-      "healthStatus": "正常 (56 %)",
+      "healthStatus": "正常",
+      "lifespan": 56,
       "smart": [
         {
           "id": "05",
@@ -891,6 +903,7 @@
     },
     {
       "id": "(07)",
+      "key": null,
       "model": "SanDisk SSD PLUS 120 GB",
       "firmware": "UE3000RL",
       "serialNumber": "************",
@@ -899,7 +912,8 @@
       "powerOnHours": 29061,
       "powerOnCount": 164,
       "temperature": 40,
-      "healthStatus": "正常 (52 %)",
+      "healthStatus": "正常",
+      "lifespan": 52,
       "smart": [
         {
           "id": "05",
@@ -1080,6 +1094,7 @@
     },
     {
       "id": "(08)",
+      "key": null,
       "model": "Crucial_CT250MX200SSD1",
       "firmware": "MU01",
       "serialNumber": "************",
@@ -1088,7 +1103,8 @@
       "powerOnHours": 48749,
       "powerOnCount": 347,
       "temperature": 42,
-      "healthStatus": "正常 (30 %)",
+      "healthStatus": "正常",
+      "lifespan": 30,
       "smart": [
         {
           "id": "01",
@@ -1255,6 +1271,7 @@
     },
     {
       "id": "(09)",
+      "key": null,
       "model": "XPG GAMMIX S50 Lite",
       "firmware": "82A7TBAA",
       "serialNumber": "************",
@@ -1263,7 +1280,8 @@
       "powerOnHours": 1054,
       "powerOnCount": 12,
       "temperature": 43,
-      "healthStatus": "正常 (89 %)",
+      "healthStatus": "正常",
+      "lifespan": 89,
       "smart": [
         {
           "id": "01",
