@@ -129,7 +129,7 @@ def _createKey(detail):
     if (detail["serialNumber"].startswith("***")):
 
         CHANGE_SETTING = f" Change setting on CrystalDiskInfo GUI."
-
+        
         if (cfg.ABORT_WHEN_HIDE_SN):
             logger.error("ABORT: Serial Number is hidden and"
             + " ABORT_WHEN_HIDE_SN is set."

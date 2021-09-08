@@ -48,7 +48,10 @@ def send_smart_data(data):
 
     results = []
     for device in data[Keys.DISK_DETAIL]:
-        types = [Keys.SMART_VALUE, Keys.SMART_WORST, Keys.SMART_THRESH]
+        types = []
+        if (cfg.SEND_SMART_VALUE): types.append(Keys.SMART_VALUE)
+        if (cfg.SEND_SMART_WORST): types.append(Keys.SMART_WORST)
+        if (cfg.SEND_SMART_THRESHOULD): types.append(Keys.SMART_THRESH)
 
         for smart in device[Keys.SMART]:
 
