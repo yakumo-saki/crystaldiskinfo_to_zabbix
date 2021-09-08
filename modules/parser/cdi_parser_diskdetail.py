@@ -51,7 +51,11 @@ def parse_diskdetail_body(detail, line):
 
     for k, v in keymaps.items():
         if (key == k):
-            if (key in convmaps):
+            if (key == "Health Status"):
+                (status, life) = _parseHealth(value)
+                detail["healthStatus"] = status
+                detail["lifespan"] = life
+            elif (key in convmaps):
                 # 変換用メソッドがある
                 detail[v] = convmaps[key](value)
             else:
@@ -82,5 +86,24 @@ def _diskSize(value):
     return num
 
 
+"""単位部分以降を削除する。
+250 時間 -> 250  / 123 回 -> 123
+"""
 def _deleteUnit(value):
     return int(value[0:value.index(" ")])
+
+
+"""Health Statusを解釈する
+return "正常" -> 正常,None （そのまま）
+return "正常 (30 %) -> 正常,30 （SSD。寿命を別で返す）
+"""
+def _parseHealth(value):
+    # 寿命が含まれなければそのまま返して抜ける
+    if (value.find("(") < 0):
+        return value, None
+
+    # 寿命を抜き出す
+    lifeStr = value[value.index("(") + 1:value.index(" %")]
+    life = int(lifeStr)
+    stat = value[0:value.index(" ")]
+    return stat, life
