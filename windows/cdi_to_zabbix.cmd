@@ -9,3 +9,9 @@ echo "Wait for CrystalDiskInfo write DiskInfo.txt"
 timeout /T 10 /NOBREAK > nul
 
 python C:\usr\src\crystaldiskinfo_to_zabbix\crystaldiskinfo_to_zabbix.py
+set RET=%ERRORLEVEL%
+
+echo Exit code is %ERRORLEVEL%
+timeout /T 10 /NOBREAK > nul
+
+exit %ERRORLEVEL%
