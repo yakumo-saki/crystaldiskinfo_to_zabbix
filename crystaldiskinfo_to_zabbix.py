@@ -14,15 +14,15 @@ logger = logging.getLogger(__name__)
 if __name__ == '__main__':
 
     if (cfg.LOG_LEVEL.upper() == "ERROR"):
-        logging.basicConfig(encoding='utf-8', level=logging.ERROR)
+        logging.basicConfig(level=logging.ERROR)
     elif (cfg.LOG_LEVEL.upper() == "WARN"):
-        logging.basicConfig(encoding='utf-8', level=logging.WARN)
+        logging.basicConfig(level=logging.WARN)
     elif (cfg.LOG_LEVEL.upper() == "INFO"):
-        logging.basicConfig(encoding='utf-8', level=logging.INFO)
+        logging.basicConfig(level=logging.INFO)
     elif (cfg.LOG_LEVEL.upper() == "DEBUG"):
-        logging.basicConfig(encoding='utf-8', level=logging.DEBUG)
+        logging.basicConfig(level=logging.DEBUG)
     else:
-        logging.basicConfig(encoding='utf-8', level=logging.INFO)
+        logging.basicConfig(level=logging.INFO)
 
     logger.debug("START")
 
