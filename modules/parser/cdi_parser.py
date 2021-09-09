@@ -38,7 +38,7 @@ def parse(path):
     result = copy.deepcopy(RESULT)
 
     logger.debug(f"Opening file: {path}")
-    with open(path) as f:
+    with open(path, encoding='utf-8') as f:
 
         detail = None
         lineNo = 0
